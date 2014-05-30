@@ -6,7 +6,6 @@ require(__dirname + '/users')(api);
 
 api.route('/boards')
 .get(function(req, res) {
-  console.log(req.user);
   db.boards.all(function(err, boards) {
     return res.json(boards);
   });
@@ -66,4 +65,25 @@ api.route('/posts/:postId')
   }
 });
 
+<<<<<<< Updated upstream
+=======
+api.route('/profiles/:userId')
+.get(function(req, res) {
+  db.profiles.find(req.params.userId, function(err, profile) {
+    return res.json(profile);
+  });
+});
+
+api.route('/me')
+.get(function(req, res) {
+  if (req.isAuthenticated()) {
+    res.json({success: true, email: req.user.email});
+  }
+  else {
+    res.status(400);
+    res.end();
+  }
+})
+
+>>>>>>> Stashed changes
 module.exports = api;
